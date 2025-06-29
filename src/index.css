@@ -1,0 +1,84 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'react-toastify/dist/ReactToastify.css';
+
+body {
+  font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Toast customizations */
+.Toastify__toast-container {
+  font-family: 'DM Sans', sans-serif;
+  --toastify-text-color-light: #2B1007;
+  --toastify-color-success: #10B981;
+  --toastify-color-error: #EF4444;
+  --toastify-color-warning: #F59E0B;
+  --toastify-color-info: #3B82F6;
+}
+
+.Toastify__toast {
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 12px 16px;
+  min-height: auto;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D54825;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #851E3D;
+}
+
+/* Custom animations */
+.helper-card-hover {
+  transition: all 200ms ease-out;
+}
+
+.helper-card-hover:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(213, 72, 37, 0.15);
+}
+
+.typing-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.typing-indicator span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #D54825;
+  animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+.typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

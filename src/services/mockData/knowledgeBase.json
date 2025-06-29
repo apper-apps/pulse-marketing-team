@@ -1,0 +1,54 @@
+[
+  {
+    "Id": 1,
+    "user_id": "user-1",
+    "company_info": {
+      "company_name": "FitTech Solutions",
+      "industry": "Fitness Equipment",
+      "target_audience": "Home fitness enthusiasts, busy professionals aged 25-45",
+      "brand_voice": "Motivational, supportive, professional yet approachable",
+      "value_proposition": "Premium home fitness equipment that fits your lifestyle and budget",
+      "key_products": ["Smart dumbbells", "Compact treadmills", "Resistance systems", "Yoga accessories"],
+      "unique_selling_points": [
+        "Space-saving designs for small homes",
+        "Smart technology integration",
+        "Professional-grade quality at home prices",
+        "Comprehensive workout apps included"
+      ],
+      "brand_personality": "Encouraging fitness coach who understands real-life constraints",
+      "tone_guidelines": [
+        "Use encouraging language without being pushy",
+        "Focus on achievable goals and realistic expectations",
+        "Acknowledge time and space constraints",
+        "Emphasize health benefits over appearance"
+      ]
+    },
+    "files": [
+      {
+        "id": "file-1",
+        "name": "Brand Guidelines 2024.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "uploaded_at": "2024-01-10T09:00:00Z",
+        "description": "Complete brand guidelines including logo usage, colors, and voice"
+      },
+      {
+        "id": "file-2",
+        "name": "Product Catalog.pdf",
+        "type": "pdf",
+        "size": "8.7 MB",
+        "uploaded_at": "2024-01-08T15:30:00Z",
+        "description": "Full product catalog with specifications and features"
+      },
+      {
+        "id": "file-3",
+        "name": "Competitor Analysis.docx",
+        "type": "docx",
+        "size": "1.2 MB",
+        "uploaded_at": "2024-01-05T11:45:00Z",
+        "description": "Comprehensive competitor analysis and positioning"
+      }
+    ],
+    "updated_at": "2024-01-10T09:00:00Z"
+  }
+]

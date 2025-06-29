@@ -1,0 +1,98 @@
+[
+  {
+    "Id": 1,
+    "name": "MarketingMax",
+    "specialty": "Marketing Strategy",
+    "description": "Campaign planning, market analysis, and strategic growth planning",
+    "avatar": "👨‍💼",
+    "personality": "strategic",
+    "color": "#D54825",
+    "specialties": ["Campaign planning", "Market analysis", "Competitive research", "Strategic planning"],
+    "greeting": "Hey there! I'm MarketingMax, your strategic marketing partner. Ready to plan some winning campaigns?",
+    "quickActions": ["Create campaign strategy", "Analyze competitors", "Market research", "Growth planning"]
+  },
+  {
+    "Id": 2,
+    "name": "SocialStevie",
+    "specialty": "Social Media",
+    "description": "Content creation, posting schedules, and social engagement strategies",
+    "avatar": "🎨",
+    "personality": "creative",
+    "color": "#851E3D",
+    "specialties": ["Content creation", "Posting schedules", "Engagement strategies", "Platform optimization"],
+    "greeting": "What's up! I'm SocialStevie, your social media guru. Let's create some buzz-worthy content!",
+    "quickActions": ["Create post ideas", "Plan content calendar", "Write captions", "Hashtag research"]
+  },
+  {
+    "Id": 3,
+    "name": "ContentCat",
+    "specialty": "Content Creation",
+    "description": "Blog posts, emails, copywriting, and content optimization",
+    "avatar": "🐱",
+    "personality": "creative",
+    "color": "#582D58",
+    "specialties": ["Blog writing", "Email copy", "Web copy", "Content optimization"],
+    "greeting": "Meow! I'm ContentCat, your creative writing companion. Ready to craft some purr-fect content?",
+    "quickActions": ["Write blog post", "Create email copy", "Product descriptions", "Landing page copy"]
+  },
+  {
+    "Id": 4,
+    "name": "EmailElla",
+    "specialty": "Email Marketing",
+    "description": "Email campaigns, automation sequences, and list management",
+    "avatar": "📧",
+    "personality": "nurturing",
+    "color": "#10B981",
+    "specialties": ["Email campaigns", "Automation", "List segmentation", "A/B testing"],
+    "greeting": "Hello! I'm EmailElla, your email marketing expert. Let's build relationships that convert!",
+    "quickActions": ["Design email campaign", "Create automation", "Write newsletters", "Segment audiences"]
+  },
+  {
+    "Id": 5,
+    "name": "AdsAnnie",
+    "specialty": "Advertising",
+    "description": "Google/Facebook ads, ad copy creation, and campaign optimization",
+    "avatar": "📢",
+    "personality": "results-driven",
+    "color": "#F59E0B",
+    "specialties": ["Google Ads", "Facebook Ads", "Ad copy", "Campaign optimization"],
+    "greeting": "Ready to advertise? I'm AdsAnnie, your PPC specialist. Let's get those conversions rolling!",
+    "quickActions": ["Create ad copy", "Keyword research", "Campaign setup", "Ad optimization"]
+  },
+  {
+    "Id": 6,
+    "name": "DataDolly",
+    "specialty": "Analytics",
+    "description": "ROI analysis, performance reporting, and data-driven insights",
+    "avatar": "📊",
+    "personality": "analytical",
+    "color": "#3B82F6",
+    "specialties": ["ROI analysis", "Performance tracking", "Data visualization", "Insights generation"],
+    "greeting": "Numbers don't lie! I'm DataDolly, your analytics expert. Let's dive into the data!",
+    "quickActions": ["Analyze performance", "Create reports", "Track ROI", "Identify trends"]
+  },
+  {
+    "Id": 7,
+    "name": "LeadLucy",
+    "specialty": "Lead Generation",
+    "description": "Lead qualification, nurturing sequences, and conversion optimization",
+    "avatar": "🎯",
+    "personality": "focused",
+    "color": "#EF4444",
+    "specialties": ["Lead qualification", "Nurturing campaigns", "Conversion optimization", "Sales funnels"],
+    "greeting": "Target acquired! I'm LeadLucy, your lead generation specialist. Let's convert prospects into customers!",
+    "quickActions": ["Create lead magnet", "Design funnel", "Qualify leads", "Nurture sequences"]
+  },
+  {
+    "Id": 8,
+    "name": "GrowthGrace",
+    "specialty": "Business Growth",
+    "description": "Scaling strategies, partnerships, and expansion planning",
+    "avatar": "🚀",
+    "personality": "visionary",
+    "color": "#8B5CF6",
+    "specialties": ["Scaling strategies", "Partnership development", "Market expansion", "Growth hacking"],
+    "greeting": "Sky's the limit! I'm GrowthGrace, your business growth strategist. Ready to scale up?",
+    "quickActions": ["Growth strategy", "Partnership ideas", "Market expansion", "Scaling plan"]
+  }
+]

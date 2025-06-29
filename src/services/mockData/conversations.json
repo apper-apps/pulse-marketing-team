@@ -1,0 +1,58 @@
+[
+  {
+    "Id": 1,
+    "user_id": "user-1",
+    "helper_id": 1,
+    "title": "Q4 Campaign Strategy",
+    "messages": [
+      {
+        "id": "msg-1",
+        "role": "assistant",
+        "content": "Hey there! I'm MarketingMax, your strategic marketing partner. Ready to plan some winning campaigns?",
+        "timestamp": "2024-01-15T10:00:00Z"
+      },
+      {
+        "id": "msg-2",
+        "role": "user",
+        "content": "I need help planning our Q4 holiday campaign for an e-commerce store selling fitness equipment.",
+        "timestamp": "2024-01-15T10:01:00Z"
+      },
+      {
+        "id": "msg-3",
+        "role": "assistant",
+        "content": "Excellent! Q4 is prime time for fitness equipment sales. Let me create a comprehensive campaign strategy for you.\n\n**Q4 Holiday Campaign Strategy:**\n\n1. **November Focus**: \"Get Ready for Resolution Season\"\n   - Early Black Friday deals (week before)\n   - Bundle packages for New Year prep\n   - Gift guides for fitness enthusiasts\n\n2. **December Push**: \"Give the Gift of Health\"\n   - Holiday gift promotions\n   - Free shipping deadlines\n   - Last-minute gift cards\n\n3. **Key Messaging**:\n   - \"Start Your 2024 Fitness Journey Early\"\n   - \"The Gift That Keeps on Giving - Health\"\n   - \"Beat the January Rush\"\n\nWould you like me to dive deeper into any specific aspect of this strategy?",
+        "timestamp": "2024-01-15T10:02:30Z"
+      }
+    ],
+    "created_at": "2024-01-15T10:00:00Z",
+    "updated_at": "2024-01-15T10:02:30Z"
+  },
+  {
+    "Id": 2,
+    "user_id": "user-1",
+    "helper_id": 3,
+    "title": "Blog Content Ideas",
+    "messages": [
+      {
+        "id": "msg-4",
+        "role": "assistant",
+        "content": "Meow! I'm ContentCat, your creative writing companion. Ready to craft some purr-fect content?",
+        "timestamp": "2024-01-14T14:30:00Z"
+      },
+      {
+        "id": "msg-5",
+        "role": "user",
+        "content": "I need 5 blog post ideas for our fitness equipment blog.",
+        "timestamp": "2024-01-14T14:31:00Z"
+      },
+      {
+        "id": "msg-6",
+        "role": "assistant",
+        "content": "Purr-fect! Here are 5 engaging blog post ideas for your fitness equipment blog:\n\n1. **\"Home Gym Essentials: 7 Must-Have Pieces for Every Fitness Level\"**\n   - Target audience: Beginners to intermediate\n   - Focus: Product recommendations with workout tips\n\n2. **\"Small Space, Big Results: Maximizing Your Apartment Workout\"**\n   - Target audience: Urban dwellers, renters\n   - Focus: Space-saving equipment and exercises\n\n3. **\"The Psychology of Home Workouts: How to Stay Motivated When Nobody's Watching\"**\n   - Target audience: Self-motivated fitness enthusiasts\n   - Focus: Mental strategies and habit formation\n\n4. **\"Equipment Maintenance 101: Making Your Investment Last\"**\n   - Target audience: Equipment owners\n   - Focus: Care tips, troubleshooting, longevity\n\n5. **\"From Couch to Confident: A 30-Day Beginner's Equipment Guide\"**\n   - Target audience: Complete beginners\n   - Focus: Progressive program with specific equipment\n\nWhich one catches your fancy? I can help you outline any of these!",
+        "timestamp": "2024-01-14T14:33:15Z"
+      }
+    ],
+    "created_at": "2024-01-14T14:30:00Z",
+    "updated_at": "2024-01-14T14:33:15Z"
+  }
+]
