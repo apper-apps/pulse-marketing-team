@@ -6,9 +6,9 @@ import ApperIcon from '@/components/ApperIcon';
 const Sidebar = ({ isCollapsed = false, onToggle }) => {
   const location = useLocation();
   
-  const navigation = [
+const navigation = [
     { name: 'Dashboard', href: '/app', icon: 'LayoutDashboard', exact: true },
-    { name: 'My Helpers', href: '/app/helpers', icon: 'Users' },
+    { name: 'My Helpers', href: '/app/my-ai-helpers', icon: 'Users' },
     { name: 'Knowledge Base', href: '/app/knowledge-base', icon: 'Database' },
     { name: 'Account', href: '/app/account', icon: 'Settings' },
     { name: 'Billing', href: '/app/billing', icon: 'CreditCard' },
