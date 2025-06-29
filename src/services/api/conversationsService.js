@@ -1,8 +1,4 @@
-import conversationsData from '@/services/mockData/conversations.json';
-
-const STORAGE_KEY = 'aimt_conversations';
-
-let conversations = [...conversationsData];
+import { toast } from 'react-toastify';
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -10,11 +6,39 @@ export const conversationsService = {
   async getAll(userId = 'user-1') {
     await delay(300);
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        conversations = JSON.parse(stored);
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "user_id" } },
+          { field: { Name: "title" } },
+          { field: { Name: "messages" } },
+          { field: { Name: "created_at" } },
+          { field: { Name: "updated_at" } },
+          { field: { Name: "helper_id" } }
+        ],
+        where: [
+          { FieldName: "user_id", Operator: "EqualTo", Values: [userId] }
+        ],
+        orderBy: [
+          { fieldName: "updated_at", sorttype: "DESC" }
+        ]
+      };
+
+      const response = await apperClient.fetchRecords('conversation', params);
+
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return [];
       }
-      return conversations.filter(conv => conv.user_id === userId);
+
+      return response.data || [];
     } catch (error) {
       console.error('Error loading conversations:', error);
       return [];
@@ -24,15 +48,33 @@ export const conversationsService = {
   async getById(id) {
     await delay(200);
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        conversations = JSON.parse(stored);
-      }
-      const conversation = conversations.find(conv => conv.Id === parseInt(id));
-      if (!conversation) {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "user_id" } },
+          { field: { Name: "title" } },
+          { field: { Name: "messages" } },
+          { field: { Name: "created_at" } },
+          { field: { Name: "updated_at" } },
+          { field: { Name: "helper_id" } }
+        ]
+      };
+
+      const response = await apperClient.getRecordById('conversation', parseInt(id), params);
+
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
         throw new Error(`Conversation with Id ${id} not found`);
       }
-      return { ...conversation };
+
+      return response.data;
     } catch (error) {
       console.error('Error loading conversation:', error);
       throw error;
@@ -42,8 +84,39 @@ export const conversationsService = {
   async getByHelper(helperId, userId = 'user-1') {
     await delay(250);
     try {
-      const allConversations = await this.getAll(userId);
-      return allConversations.filter(conv => conv.helper_id === parseInt(helperId));
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "user_id" } },
+          { field: { Name: "title" } },
+          { field: { Name: "messages" } },
+          { field: { Name: "created_at" } },
+          { field: { Name: "updated_at" } },
+          { field: { Name: "helper_id" } }
+        ],
+        where: [
+          { FieldName: "helper_id", Operator: "EqualTo", Values: [parseInt(helperId)] },
+          { FieldName: "user_id", Operator: "EqualTo", Values: [userId] }
+        ],
+        orderBy: [
+          { fieldName: "updated_at", sorttype: "DESC" }
+        ]
+      };
+
+      const response = await apperClient.fetchRecords('conversation', params);
+
+      if (!response.success) {
+        console.error(response.message);
+        return [];
+      }
+
+      return response.data || [];
     } catch (error) {
       console.error('Error loading helper conversations:', error);
       return [];
@@ -53,26 +126,47 @@ export const conversationsService = {
   async create(conversationData) {
     await delay(300);
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        conversations = JSON.parse(stored);
-      }
-      
-      const maxId = conversations.length > 0 ? Math.max(...conversations.map(c => c.Id)) : 0;
-      const newConversation = {
-        Id: maxId + 1,
-        user_id: conversationData.user_id || 'user-1',
-        helper_id: parseInt(conversationData.helper_id),
-        title: conversationData.title || 'New Conversation',
-        messages: conversationData.messages || [],
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        records: [
+          {
+            user_id: conversationData.user_id || 'user-1',
+            helper_id: parseInt(conversationData.helper_id),
+            title: conversationData.title || 'New Conversation',
+            messages: JSON.stringify(conversationData.messages || []),
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          }
+        ]
       };
-      
-      conversations.push(newConversation);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(conversations));
-      
-      return { ...newConversation };
+
+      const response = await apperClient.createRecord('conversation', params);
+
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        throw new Error('Failed to create conversation');
+      }
+
+      if (response.results) {
+        const failedRecords = response.results.filter(result => !result.success);
+        if (failedRecords.length > 0) {
+          console.error(`Failed to create ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+          throw new Error('Failed to create conversation');
+        }
+
+        const successfulRecords = response.results.filter(result => result.success);
+        if (successfulRecords.length > 0) {
+          return successfulRecords[0].data;
+        }
+      }
+
+      throw new Error('Failed to create conversation');
     } catch (error) {
       console.error('Error creating conversation:', error);
       throw error;
@@ -82,15 +176,9 @@ export const conversationsService = {
   async addMessage(conversationId, message) {
     await delay(200);
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        conversations = JSON.parse(stored);
-      }
-      
-      const conversationIndex = conversations.findIndex(conv => conv.Id === parseInt(conversationId));
-      if (conversationIndex === -1) {
-        throw new Error(`Conversation with Id ${conversationId} not found`);
-      }
+      // First get the current conversation
+      const conversation = await this.getById(conversationId);
+      const currentMessages = conversation.messages ? JSON.parse(conversation.messages) : [];
       
       const messageId = `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
       const newMessage = {
@@ -100,17 +188,40 @@ export const conversationsService = {
         timestamp: new Date().toISOString()
       };
       
-      conversations[conversationIndex].messages.push(newMessage);
-      conversations[conversationIndex].updated_at = new Date().toISOString();
+      currentMessages.push(newMessage);
       
       // Update title if it's the first user message
-      if (message.role === 'user' && conversations[conversationIndex].messages.length <= 2) {
-        conversations[conversationIndex].title = message.content.substring(0, 50) + (message.content.length > 50 ? '...' : '');
+      let newTitle = conversation.title;
+      if (message.role === 'user' && currentMessages.length <= 2) {
+        newTitle = message.content.substring(0, 50) + (message.content.length > 50 ? '...' : '');
       }
-      
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(conversations));
-      
-      return { ...conversations[conversationIndex] };
+
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        records: [
+          {
+            Id: parseInt(conversationId),
+            title: newTitle,
+            messages: JSON.stringify(currentMessages),
+            updated_at: new Date().toISOString()
+          }
+        ]
+      };
+
+      const response = await apperClient.updateRecord('conversation', params);
+
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        throw new Error('Failed to add message');
+      }
+
+      return await this.getById(conversationId);
     } catch (error) {
       console.error('Error adding message:', error);
       throw error;
@@ -120,19 +231,32 @@ export const conversationsService = {
   async delete(id) {
     await delay(200);
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        conversations = JSON.parse(stored);
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        RecordIds: [parseInt(id)]
+      };
+
+      const response = await apperClient.deleteRecord('conversation', params);
+
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return false;
       }
-      
-      const initialLength = conversations.length;
-      conversations = conversations.filter(conv => conv.Id !== parseInt(id));
-      
-      if (conversations.length === initialLength) {
-        throw new Error(`Conversation with Id ${id} not found`);
+
+      if (response.results) {
+        const failedDeletions = response.results.filter(result => !result.success);
+        if (failedDeletions.length > 0) {
+          console.error(`Failed to delete ${failedDeletions.length} records:${JSON.stringify(failedDeletions)}`);
+          return false;
+        }
       }
-      
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(conversations));
+
       return true;
     } catch (error) {
       console.error('Error deleting conversation:', error);

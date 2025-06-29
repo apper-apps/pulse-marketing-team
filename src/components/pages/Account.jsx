@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { toast } from 'react-toastify';
-import Button from '@/components/atoms/Button';
-import Input from '@/components/atoms/Input';
-import Badge from '@/components/atoms/Badge';
-import ApperIcon from '@/components/ApperIcon';
+import React, { useContext, useState } from "react";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { AuthContext } from "../../App";
+import ApperIcon from "@/components/ApperIcon";
+import Billing from "@/components/pages/Billing";
+import Badge from "@/components/atoms/Badge";
+import Input from "@/components/atoms/Input";
+import Button from "@/components/atoms/Button";
 
 const Account = () => {
+  const { user } = useSelector((state) => state.user);
+  const { logout } = useContext(AuthContext);
+  
   const [profileData, setProfileData] = useState({
-    email: 'demo@aimarketingteam.com',
-    company_name: 'FitTech Solutions',
-    first_name: 'Demo',
-    last_name: 'User',
-    phone: '+1 (555) 123-4567',
+    email: user?.emailAddress || 'demo@aimarketingteam.com',
+    company_name: user?.accounts?.[0]?.companyName || 'FitTech Solutions',
+    first_name: user?.firstName || 'Demo',
+    last_name: user?.lastName || 'User',
+    phone: user?.phoneNumber || '+1 (555) 123-4567',
     timezone: 'America/New_York'
   });
   
@@ -289,15 +295,41 @@ const Account = () => {
           />
         </div>
 
-        <div className="mt-6">
+<div className="mt-6">
           <Button
             variant="secondary"
             onClick={handleChangePassword}
             loading={saving}
-            icon="Shield"
-            disabled={!passwordData.current_password || !passwordData.new_password || !passwordData.confirm_password}
+            icon="Lock"
           >
             {saving ? 'Changing Password...' : 'Change Password'}
+          </Button>
+        </div>
+      </motion.div>
+
+      {/* Logout Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+        className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm"
+      >
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-semibold text-charcoal mb-2">
+              Account Actions
+            </h2>
+            <p className="text-gray-600">
+              Manage your account session and security
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            onClick={logout}
+            icon="LogOut"
+            className="text-red-600 border-red-200 hover:bg-red-50"
+          >
+            Sign Out
           </Button>
         </div>
       </motion.div>
