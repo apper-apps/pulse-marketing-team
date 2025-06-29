@@ -8,7 +8,7 @@ const Sidebar = ({ isCollapsed = false, onToggle }) => {
   
 const navigation = [
     { name: 'Dashboard', href: '/app', icon: 'LayoutDashboard', exact: true },
-    { name: 'My Helpers', href: '/app/my-ai-helpers', icon: 'Users' },
+    { name: 'My Helpers', href: '/app/my-helpers', icon: 'Users' },
     { name: 'Knowledge Base', href: '/app/knowledge-base', icon: 'Database' },
     { name: 'Account', href: '/app/account', icon: 'Settings' },
     { name: 'Billing', href: '/app/billing', icon: 'CreditCard' },
