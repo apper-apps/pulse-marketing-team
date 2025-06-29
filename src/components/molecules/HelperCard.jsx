@@ -8,6 +8,27 @@ const HelperCard = ({ helper, showUsage = false, className = '' }) => {
   const usageCount = helper.usage_count || 0;
   const lastUsed = helper.last_used;
 
+  // Helper function to safely convert specialties to array format
+  const getSpecialtiesArray = (specialties) => {
+    if (!specialties) return [];
+    if (Array.isArray(specialties)) return specialties;
+    
+    // Try to parse as JSON string first (database format)
+    if (typeof specialties === 'string') {
+      try {
+        const parsed = JSON.parse(specialties);
+        if (Array.isArray(parsed)) return parsed;
+      } catch (e) {
+        // If JSON parsing fails, try splitting by comma
+        return specialties.split(',').map(s => s.trim()).filter(s => s.length > 0);
+      }
+    }
+    
+    return [];
+  };
+
+  const specialtiesArray = getSpecialtiesArray(helper.specialties);
+
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
@@ -49,14 +70,14 @@ const HelperCard = ({ helper, showUsage = false, className = '' }) => {
             
             {/* Specialties */}
             <div className="flex flex-wrap gap-1 mb-3">
-              {helper.specialties?.slice(0, 2).map((specialty, index) => (
+              {specialtiesArray.slice(0, 2).map((specialty, index) => (
                 <Badge key={index} variant="default" size="sm">
                   {specialty}
                 </Badge>
               ))}
-              {helper.specialties?.length > 2 && (
+              {specialtiesArray.length > 2 && (
                 <Badge variant="default" size="sm">
-                  +{helper.specialties.length - 2} more
+                  +{specialtiesArray.length - 2} more
                 </Badge>
               )}
             </div>
