@@ -102,6 +102,14 @@ return (
               )}
             </div>
             
+{/* Training Information */}
+            {(helper.trainingInstructions || helper.trainingKnowledge) && (
+              <div className="flex items-center text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded-md mb-2">
+                <ApperIcon name="BookOpen" size={12} className="mr-1" />
+                Specialized Training
+              </div>
+            )}
+            
             {/* Last used */}
             {showUsage && lastUsed && (
               <div className="flex items-center text-xs text-gray-500">
@@ -111,7 +119,6 @@ return (
             )}
           </div>
         </div>
-        
         {/* Chat arrow */}
         <div className="flex justify-end mt-4">
           <div className="flex items-center text-primary text-sm font-medium">

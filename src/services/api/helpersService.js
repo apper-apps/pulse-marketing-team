@@ -12,7 +12,7 @@ export const helpersService = {
       });
 
       const params = {
-        fields: [
+fields: [
           { field: { Name: "Name" } },
           { field: { Name: "specialty" } },
           { field: { Name: "description" } },
@@ -23,7 +23,9 @@ export const helpersService = {
           { field: { Name: "greeting" } },
           { field: { Name: "quick_actions" } },
           { field: { Name: "usage_count" } },
-          { field: { Name: "last_used" } }
+          { field: { Name: "last_used" } },
+          { field: { Name: "trainingInstructions" } },
+          { field: { Name: "trainingKnowledge" } }
         ],
         orderBy: [
           { fieldName: "Name", sorttype: "ASC" }
@@ -56,7 +58,7 @@ export const helpersService = {
       });
 
       const params = {
-        fields: [
+fields: [
           { field: { Name: "Name" } },
           { field: { Name: "specialty" } },
           { field: { Name: "description" } },
@@ -67,7 +69,9 @@ export const helpersService = {
           { field: { Name: "greeting" } },
           { field: { Name: "quick_actions" } },
           { field: { Name: "usage_count" } },
-          { field: { Name: "last_used" } }
+          { field: { Name: "last_used" } },
+          { field: { Name: "trainingInstructions" } },
+          { field: { Name: "trainingKnowledge" } }
         ]
       };
 
@@ -146,21 +150,23 @@ async getOrCreateHelperKnowledgeBase(helperId) {
 
     // First try to get existing knowledge base for this helper
     const params = {
-      fields: [
-        { field: { Name: "Name" } },
-        { field: { Name: "user_id" } },
-        { field: { Name: "company_name" } },
-        { field: { Name: "industry" } },
-        { field: { Name: "target_audience" } },
-        { field: { Name: "brand_voice" } },
-        { field: { Name: "value_proposition" } },
-        { field: { Name: "key_products" } },
-        { field: { Name: "unique_selling_points" } },
-        { field: { Name: "brand_personality" } },
-        { field: { Name: "tone_guidelines" } },
-        { field: { Name: "files" } },
-        { field: { Name: "updated_at" } }
-      ],
+fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "user_id" } },
+          { field: { Name: "company_name" } },
+          { field: { Name: "industry" } },
+          { field: { Name: "target_audience" } },
+          { field: { Name: "brand_voice" } },
+          { field: { Name: "value_proposition" } },
+          { field: { Name: "key_products" } },
+          { field: { Name: "unique_selling_points" } },
+          { field: { Name: "brand_personality" } },
+          { field: { Name: "tone_guidelines" } },
+          { field: { Name: "files" } },
+          { field: { Name: "updated_at" } },
+          { field: { Name: "trainingInstructions" } },
+          { field: { Name: "trainingKnowledge" } }
+        ],
       where: [
         { FieldName: "user_id", Operator: "EqualTo", Values: [`helper-${helperId}`] }
       ]
@@ -266,21 +272,23 @@ async getHelperKnowledgeBase(helperId) {
     });
 
     const params = {
-      fields: [
-        { field: { Name: "Name" } },
-        { field: { Name: "user_id" } },
-        { field: { Name: "company_name" } },
-        { field: { Name: "industry" } },
-        { field: { Name: "target_audience" } },
-        { field: { Name: "brand_voice" } },
-        { field: { Name: "value_proposition" } },
-        { field: { Name: "key_products" } },
-        { field: { Name: "unique_selling_points" } },
-        { field: { Name: "brand_personality" } },
-        { field: { Name: "tone_guidelines" } },
-        { field: { Name: "files" } },
-        { field: { Name: "updated_at" } }
-      ],
+fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "user_id" } },
+          { field: { Name: "company_name" } },
+          { field: { Name: "industry" } },
+          { field: { Name: "target_audience" } },
+          { field: { Name: "brand_voice" } },
+          { field: { Name: "value_proposition" } },
+          { field: { Name: "key_products" } },
+          { field: { Name: "unique_selling_points" } },
+          { field: { Name: "brand_personality" } },
+          { field: { Name: "tone_guidelines" } },
+          { field: { Name: "files" } },
+          { field: { Name: "updated_at" } },
+          { field: { Name: "trainingInstructions" } },
+          { field: { Name: "trainingKnowledge" } }
+        ],
       where: [
         { FieldName: "user_id", Operator: "EqualTo", Values: [`helper-${helperId}`] }
       ]
