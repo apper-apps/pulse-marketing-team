@@ -1,28 +1,31 @@
-import { createContext, useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
-import { setUser, clearUser } from './store/userSlice';
-import Layout from '@/components/organisms/Layout';
-import LandingPage from '@/components/pages/LandingPage';
-import Login from '@/components/pages/Login';
-import Signup from '@/components/pages/Signup';
-import Callback from '@/components/pages/Callback';
-import ErrorPage from '@/components/pages/ErrorPage';
-import ResetPassword from '@/components/pages/ResetPassword';
-import PromptPassword from '@/components/pages/PromptPassword';
-import Dashboard from '@/components/pages/Dashboard';
-import HelperChat from '@/components/pages/HelperChat';
-import KnowledgeBase from '@/components/pages/KnowledgeBase';
-import Account from '@/components/pages/Account';
-import Billing from '@/components/pages/Billing';
+import React, { createContext, useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import MyAIHelpers from "@/components/pages/MyAIHelpers";
+import NotFound from "@/components/pages/NotFound";
+import { clearUser, setUser } from "@/store/userSlice";
+import Signup from "@/components/pages/Signup";
+import Dashboard from "@/components/pages/Dashboard";
+import RegisterPage from "@/components/pages/RegisterPage";
+import PromptPassword from "@/components/pages/PromptPassword";
+import Billing from "@/components/pages/Billing";
+import ErrorPage from "@/components/pages/ErrorPage";
+import ResetPassword from "@/components/pages/ResetPassword";
+import LandingPage from "@/components/pages/LandingPage";
+import KnowledgeBase from "@/components/pages/KnowledgeBase";
+import Callback from "@/components/pages/Callback";
+import Login from "@/components/pages/Login";
+import Layout from "@/components/organisms/Layout";
+import Account from "@/components/pages/Account";
+import HelperChat from "@/components/pages/HelperChat";
 
-// Create auth context
-export const AuthContext = createContext(null);
+// Create authentication context
+export const AuthContext = createContext();
 
 function App() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isInitialized, setIsInitialized] = useState(false);
   
   // Get authentication status with proper error handling
@@ -43,7 +46,7 @@ function App() {
       target: '#authentication',
       clientId: import.meta.env.VITE_APPER_PROJECT_ID,
       view: 'both',
-      onSuccess: function (user) {
+onSuccess: function (user) {
         setIsInitialized(true);
         // CRITICAL: This exact currentPath logic must be preserved in all implementations
         // DO NOT simplify or modify this pattern as it ensures proper redirection flow
@@ -53,13 +56,13 @@ function App() {
                            currentPath.includes('/callback') || currentPath.includes('/error') || 
                            currentPath.includes('/prompt-password') || currentPath.includes('/reset-password');
         
-        if (user) {
+        if (user && user.isAuthenticated) {
           // User is authenticated
           if (redirectPath) {
-            navigate(redirectPath);
-          } else if (!isAuthPage) {
-            if (!currentPath.includes('/login') && !currentPath.includes('/signup')) {
-              navigate(currentPath);
+            if (
+              !['error', 'signup', 'login', 'callback', 'prompt-password', 'reset-password'].some((path) => redirectPath.includes(path))
+            ) {
+              navigate(redirectPath);
             } else {
               navigate('/app');
             }
@@ -130,13 +133,15 @@ function App() {
         <Route path="/error" element={<ErrorPage />} />
         <Route path="/prompt-password/:appId/:emailAddress/:provider" element={<PromptPassword />} />
         <Route path="/reset-password/:appId/:fields" element={<ResetPassword />} />
-        <Route path="/app" element={<Layout />}>
+<Route path="/app" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="helper/:helperId" element={<HelperChat />} />
           <Route path="knowledge-base" element={<KnowledgeBase />} />
+          <Route path="my-helpers" element={<MyAIHelpers />} />
           <Route path="account" element={<Account />} />
           <Route path="billing" element={<Billing />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       
       <ToastContainer

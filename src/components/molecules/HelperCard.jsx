@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Badge from '@/components/atoms/Badge';
 import ApperIcon from '@/components/ApperIcon';
 
-const HelperCard = ({ helper, showUsage = false, className = '' }) => {
+const HelperCard = ({ helper, showUsage = false, className = '', isFavorited = false, onToggleFavorite }) => {
   const usageCount = helper.usage_count || 0;
   const lastUsed = helper.last_used;
 
@@ -29,17 +29,37 @@ const HelperCard = ({ helper, showUsage = false, className = '' }) => {
 
   const specialtiesArray = getSpecialtiesArray(helper.specialties);
 
-  return (
+return (
     <motion.div
       whileHover={{ scale: 1.02 }}
-      className={`helper-card-hover bg-white rounded-xl p-6 border border-gray-200 shadow-sm ${className}`}
+      className={`helper-card-hover bg-white rounded-xl p-6 border border-gray-200 shadow-sm relative ${className}`}
     >
+      {/* Favorite Button */}
+      {onToggleFavorite && (
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onToggleFavorite(helper.Id);
+          }}
+          className="absolute top-4 right-4 z-10 p-2 rounded-full hover:bg-gray-100 transition-colors"
+        >
+          <ApperIcon 
+            name="Heart" 
+            size={20} 
+            className={`transition-colors ${isFavorited ? 'text-red-500 fill-red-500' : 'text-gray-400 hover:text-red-400'}`}
+          />
+        </motion.button>
+      )}
+      
       <Link to={`/app/helper/${helper.Id}`} className="block">
         <div className="flex items-start space-x-4">
           {/* Avatar */}
           <div 
             className="w-16 h-16 rounded-full flex items-center justify-center text-2xl"
-            style={{ 
+            style={{
               background: `linear-gradient(135deg, ${helper.color}20, ${helper.color}10)`,
               border: `2px solid ${helper.color}30`
             }}
