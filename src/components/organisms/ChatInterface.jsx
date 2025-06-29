@@ -1,15 +1,18 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { toast } from 'react-toastify';
-import ChatMessage from '@/components/molecules/ChatMessage';
-import QuickActions from '@/components/molecules/QuickActions';
-import Button from '@/components/atoms/Button';
-import ApperIcon from '@/components/ApperIcon';
-import Loading from '@/components/ui/Loading';
-import { conversationsService } from '@/services/api/conversationsService';
-import { aiService } from '@/services/api/aiService';
-import { helpersService } from '@/services/api/helpersService';
-
+import React, { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
+import ChatMessage from "@/components/molecules/ChatMessage";
+import QuickActions from "@/components/molecules/QuickActions";
+import Loading from "@/components/ui/Loading";
+import { conversationsService } from "@/services/api/conversationsService";
+import { aiService } from "@/services/api/aiService";
+import { helpersService } from "@/services/api/helpersService";
+import conversationsData from "@/services/mockData/conversations.json";
+import usersData from "@/services/mockData/users.json";
+import knowledgeBaseData from "@/services/mockData/knowledgeBase.json";
+import helpersData from "@/services/mockData/helpers.json";
 const ChatInterface = ({ helper, conversationId = null }) => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -121,9 +124,8 @@ const ChatInterface = ({ helper, conversationId = null }) => {
     setLoading(true);
     setTyping(true);
 
-    try {
-      const response = await aiService.processQuickAction(helper, action);
-      
+try {
+      const response = await aiService.processQuickAction(helper, action, knowledgeBaseData);
       const actionMessage = {
         id: `action-${Date.now()}`,
         role: 'assistant',

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import ChatInterface from '@/components/organisms/ChatInterface';
-import Button from '@/components/atoms/Button';
-import Loading from '@/components/ui/Loading';
-import Error from '@/components/ui/Error';
-import ApperIcon from '@/components/ApperIcon';
-import { helpersService } from '@/services/api/helpersService';
-import { conversationsService } from '@/services/api/conversationsService';
-
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import ApperIcon from "@/components/ApperIcon";
+import Dashboard from "@/components/pages/Dashboard";
+import ChatInterface from "@/components/organisms/ChatInterface";
+import Button from "@/components/atoms/Button";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import { conversationsService } from "@/services/api/conversationsService";
+import { helpersService } from "@/services/api/helpersService";
 const HelperChat = () => {
   const { helperId } = useParams();
   const [helper, setHelper] = useState(null);
@@ -16,8 +16,8 @@ const HelperChat = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showHistory, setShowHistory] = useState(false);
-
-  const loadHelperData = async () => {
+  const [knowledgeBase, setKnowledgeBase] = useState([]);
+const loadHelperData = async () => {
     try {
       setLoading(true);
       setError('');
@@ -29,6 +29,7 @@ const HelperChat = () => {
       
       setHelper(helperData);
       setConversations(helperConversations);
+      setKnowledgeBase(helperData?.knowledgeBase || []);
     } catch (err) {
       setError('Failed to load helper data. Please try again.');
       console.error('Error loading helper:', err);
@@ -153,11 +154,11 @@ const HelperChat = () => {
               </Button>
             </div>
           </div>
-        </div>
+</div>
 
         {/* Chat Interface */}
         <div className="flex-1">
-          <ChatInterface helper={helper} />
+          <ChatInterface helper={helper} knowledgeBase={knowledgeBase} />
         </div>
       </div>
     </div>
