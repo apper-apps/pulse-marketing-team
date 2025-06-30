@@ -34,22 +34,27 @@ const ChatInterface = ({ helper, conversationId = null }) => {
     initializeChat();
   }, [helper.Id, conversationId]);
 
-  const initializeChat = async () => {
+const initializeChat = async () => {
     try {
       if (conversationId) {
         // Load existing conversation
         const conversation = await conversationsService.getById(conversationId);
-        setMessages(conversation.messages);
+        const existingMessages = conversation.messages ? 
+          (typeof conversation.messages === 'string' ? JSON.parse(conversation.messages) : conversation.messages) : [];
+        setMessages(existingMessages);
         setCurrentConversationId(conversationId);
       } else {
-        // Start with greeting message
-        const greetingMessage = {
-          id: `greeting-${Date.now()}`,
-          role: 'assistant',
-          content: helper.greeting,
-          timestamp: new Date().toISOString()
-        };
-        setMessages([greetingMessage]);
+        // Only add greeting for completely new conversations
+        // Check if there are already messages to prevent duplicate greetings
+        if (messages.length === 0) {
+          const greetingMessage = {
+            id: `greeting-${Date.now()}`,
+            role: 'assistant',
+            content: helper.greeting,
+            timestamp: new Date().toISOString()
+          };
+          setMessages([greetingMessage]);
+        }
       }
     } catch (error) {
       console.error('Error initializing chat:', error);
