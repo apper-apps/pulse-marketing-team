@@ -42,11 +42,12 @@ function App() {
     });
     
     // Initialize but don't show login yet
+// Initialize but don't show login yet
     ApperUI.setup(client, {
       target: '#authentication',
       clientId: import.meta.env.VITE_APPER_PROJECT_ID,
       view: 'both',
-onSuccess: function (user) {
+      onSuccess: function (user) {
         setIsInitialized(true);
         // CRITICAL: This exact currentPath logic must be preserved in all implementations
         // DO NOT simplify or modify this pattern as it ensures proper redirection flow
