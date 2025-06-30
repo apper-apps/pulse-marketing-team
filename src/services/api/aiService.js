@@ -1,5 +1,3 @@
-import React from "react";
-import Error from "@/components/ui/Error";
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Mock AI responses based on helper personality and user input
@@ -213,12 +211,12 @@ const generateVariedResponse = (helperData, userMessage, conversationHistory, he
     `Here's another way to think about this challenge, with some new strategies you might not have considered...`,
     `I have some additional ideas that might be exactly what you're looking for...`,
     `Let me share some alternative approaches that could work well for your specific situation...`
-const randomAlternative = alternatives[Math.floor(Math.random() * alternatives.length)];
+  ];
+  const randomAlternative = alternatives[Math.floor(Math.random() * alternatives.length)];
   return randomAlternative;
 };
 
 export const aiService = {
-  async generateResponse(helperData, userMessage, conversationHistory = []) {
   async generateResponse(helperData, userMessage, conversationHistory = []) {
     // Simulate API call delay
     await delay(1500 + Math.random() * 1000);
